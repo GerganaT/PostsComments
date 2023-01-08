@@ -1,4 +1,4 @@
-package UI.ui.theme
+package com.example.android.postscomments.ui.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

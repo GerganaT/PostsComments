@@ -12,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PostsComments"
-        tools:targetApi="31">
+        tools:targetApi="s">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
+            android:configChanges="orientation"
             android:exported="true"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.PostsComments">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

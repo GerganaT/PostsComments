@@ -1,4 +1,4 @@
-package UI.ui.theme
+package com.example.android.postscomments.ui.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

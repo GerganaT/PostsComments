@@ -1,4 +1,4 @@
-package com.example.android.postscomments
+package com.example.android.postscomments.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import UI.ui.theme.PostsCommentsTheme
+import com.example.android.postscomments.ui.ui.theme.PostsCommentsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
