@@ -4,8 +4,9 @@ plugins {
 }
 
 android {
+    // latest release is 33 ,however this creates an attribute unknown bug in the Android Manifest file
+    // so I had to revert to 32 until that's fixed in later releases of Android Studio
     compileSdk 32
-
     defaultConfig {
         applicationId "com.example.android.postscomments"
         minSdk 29
