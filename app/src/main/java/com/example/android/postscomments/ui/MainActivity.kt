@@ -41,3 +41,4 @@ fun DefaultPreview() {
         Greeting("Android")
     }
 }
+//TODO Start working on the posts screen
