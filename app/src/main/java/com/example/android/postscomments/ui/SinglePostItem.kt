@@ -37,7 +37,7 @@ fun SinglePost(
 
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun SinglePostPreview() {
     PostsCommentsTheme {

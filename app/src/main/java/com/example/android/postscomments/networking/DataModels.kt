@@ -7,13 +7,13 @@ import com.squareup.moshi.Json
 // to be able to define custom variable names,while still matching the original JSON fields' names
 
 data class Post(
-    val userId:Int,
-    @Json(name = "id") val postId:Int,
-    val title:String,
-    val body:String
+    @Json(name = "userId") val authorId: Int,
+    @Json(name = "id") val postId: Int,
+    val title: String,
+    val body: String
 )
 
 data class Comment(
-    @Json(name = "email") val userEmail:String,
-    val body:String
+    @Json(name = "email") val userEmail: String,
+    val body: String
 )
