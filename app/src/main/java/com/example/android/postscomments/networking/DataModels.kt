@@ -1,6 +1,7 @@
 package com.example.android.postscomments.networking
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 // Classes ,used by Moshi, to model the network data into Kotlin objects
 // I realize that I could've used Scalars converter but I really like the possibility

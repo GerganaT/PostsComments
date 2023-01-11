@@ -67,9 +67,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlin_coroutines_adapter_version"
+    // various lifecycle - aware dependencies for compose
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$compose_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
 }
 
 repositories {

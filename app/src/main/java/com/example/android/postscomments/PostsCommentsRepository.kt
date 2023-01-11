@@ -1,5 +1,6 @@
 package com.example.android.postscomments
 
+import android.util.Log
 import com.example.android.postscomments.networking.Post
 import com.example.android.postscomments.networking.PostsCommentsApiService
 import kotlinx.coroutines.Dispatchers
@@ -10,11 +11,18 @@ class PostsCommentsRepository(
     val postsApi: PostsCommentsApiService
 ) {
 
-    var posts: List<Post> = listOf()
+
     suspend fun getData(): List<Post> {
+        var posts:List<Post> = listOf()
         withContext(Dispatchers.IO) {
-            posts = postsApi.getAllPosts()
+            val response = postsApi.getAllPosts()
+            if(response.isSuccessful){
+                 posts = response.body()!!
+
+            }
+
         }
         return posts
     }
 }
+//TODO add Result error handling/ show toast

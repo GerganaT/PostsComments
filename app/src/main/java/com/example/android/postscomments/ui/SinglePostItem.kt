@@ -1,6 +1,7 @@
 package com.example.android.postscomments.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -21,7 +22,10 @@ fun SinglePost(
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
-    Surface(color = backgroundColor) {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = backgroundColor
+    ) {
         Column(
             modifier = modifier
                 .padding(8.dp)

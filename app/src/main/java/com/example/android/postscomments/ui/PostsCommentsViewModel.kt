@@ -1,26 +1,35 @@
 package com.example.android.postscomments.ui
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.postscomments.PostsCommentsRepository
 import com.example.android.postscomments.networking.Post
 import com.example.android.postscomments.networking.PostsCommentsApiServiceEntryPoint
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class PostsCommentsViewModel:ViewModel() {
-    val postsList: State<List<Post>>
-    get() = data
-    val repository = PostsCommentsRepository(PostsCommentsApiServiceEntryPoint.apiService)
+    private var mutablePostsList= MutableStateFlow<SnapshotStateList<Post>>(mutableStateListOf())
 
- private var data:MutableState<List<Post>> = mutableStateOf(listOf())
+    val postsList:StateFlow<SnapshotStateList<Post>>
+    get() = mutablePostsList
+
+
+    private val repository = PostsCommentsRepository(PostsCommentsApiServiceEntryPoint.apiService)
+
+
  init {
      viewModelScope.launch {
-         data = mutableStateOf(repository.getData())
+         mutablePostsList.value = repository.getData().toMutableStateList()
      }
  }
+
+
 
 }
 //TODO fix dependency tight coupling here
