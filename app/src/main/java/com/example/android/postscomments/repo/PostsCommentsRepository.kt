@@ -1,6 +1,5 @@
-package com.example.android.postscomments
+package com.example.android.postscomments.repo
 
-import android.util.Log
 import com.example.android.postscomments.networking.Post
 import com.example.android.postscomments.networking.PostsCommentsApiService
 import kotlinx.coroutines.Dispatchers
@@ -12,17 +11,18 @@ class PostsCommentsRepository(
 ) {
 
 
-    suspend fun getData(): List<Post> {
-        var posts:List<Post> = listOf()
+    suspend fun getData(): Result<List<Post>> {
+
+        var result: Result<List<Post>>
         withContext(Dispatchers.IO) {
             val response = postsApi.getAllPosts()
-            if(response.isSuccessful){
-                 posts = response.body()!!
-
+            result = when {
+                response.body()?.isEmpty() == true -> Result.Progress(true)
+                response.isSuccessful -> Result.Success(response.body()!!)
+                else -> Result.Error(true)
             }
-
         }
-        return posts
+        return result
     }
 }
 //TODO add Result error handling/ show toast

@@ -12,11 +12,11 @@ class MainActivity : ComponentActivity() {
         val viewModel: PostsCommentsViewModel by viewModels()
         setContent {
             PostsCommentsTheme {
-                PostsList(viewModel = viewModel)
+                PostsListScreen(viewModel = viewModel)
             }
         }
     }
 
 
 }
-//TODO set up custom screen names Posts and Comments
+//TODO set up custom screen names Posts and Comments and navigation
