@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PostsComments</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="data_not_loaded_error_message_1st_part">Oops,there was an error.</string>
-    <string name="data_not_loaded_error_message_2nd_part">Tap to retry.</string>
+    <string name="data_not_loaded_error_message">Oops,there was an error.\nTap to retry.</string>
 </resources>

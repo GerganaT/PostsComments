@@ -12,17 +12,19 @@ class PostsCommentsRepository(
 
 
     suspend fun getData(): Result<List<Post>> {
-
-        var result: Result<List<Post>>
-        withContext(Dispatchers.IO) {
-            val response = postsApi.getAllPosts()
-            result = when {
-                response.body()?.isEmpty() == true -> Result.Progress(true)
-                response.isSuccessful -> Result.Success(response.body()!!)
-                else -> Result.Error(true)
+        return try {
+            withContext(Dispatchers.IO) {
+                val response = postsApi.getAllPosts()
+                when {
+                    response.body()?.isEmpty() == true -> Result.Progress()
+                    response.isSuccessful -> Result.Success(response.body()!!)
+                    else -> Result.Error
+                }
             }
         }
-        return result
+        // catch any exception be it network or other issue - related
+        catch (exception: Exception) {
+            Result.Error
+        }
     }
 }
-//TODO add Result error handling/ show toast

@@ -1,8 +1,6 @@
 package com.example.android.postscomments.ui
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.graphics.Color
@@ -15,28 +13,29 @@ import com.example.android.postscomments.repo.Result
 import com.example.android.postscomments.ui.ui.theme.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PostsCommentsViewModel : ViewModel() {
-    private var mutablePostsList = MutableStateFlow<SnapshotStateList<Post>>(mutableStateListOf())
+    private var _postsList =
+        MutableStateFlow<SnapshotStateList<Post>>(mutableStateListOf())
 
-    val postsList: StateFlow<SnapshotStateList<Post>>
-        get() = mutablePostsList
+    val postsList: StateFlow<SnapshotStateList<Post>> =
+        _postsList.asStateFlow()
 
-    private var _isError = mutableStateOf(false)
-    val isError: State<Boolean>
-        get() = _isError
+    private var _dataFetchResult: MutableStateFlow<Result<List<Post>>> =
+        MutableStateFlow(Result.Progress())
 
-    private var _isLoading = mutableStateOf(false)
-    val isLoading: State<Boolean>
-        get() = _isLoading
+    val dataFetchResult: StateFlow<Result<List<Post>>> =
+        _dataFetchResult.asStateFlow()
 
-    private val repository = PostsCommentsRepository(PostsCommentsApiServiceEntryPoint.apiService)
+    private val repository =
+        PostsCommentsRepository(PostsCommentsApiServiceEntryPoint.apiService)
 
 
     init {
         viewModelScope.launch {
-            getPostsData()
+            getPostsDataAndRecordResult()
         }
     }
 
@@ -48,14 +47,19 @@ class PostsCommentsViewModel : ViewModel() {
         return authorsAndColors[authorId]!!
     }
 
-    suspend fun getPostsData() {
-        val postsData = repository.getData()
-        when (postsData) {
-            is Result.Progress -> _isLoading.value = postsData.isLoading
-            is Result.Success -> mutablePostsList.value = postsData.data.toMutableStateList()
-            is Result.Error -> _isError.value = postsData.showErrorMessage
+    suspend fun getPostsDataAndRecordResult() {
+        val postsResult = repository.getData()
+        _dataFetchResult.value = postsResult
+        if (postsResult is Result.Success) {
+            _postsList.value =
+                postsResult.data.sortedBy { post: Post -> post.title }.toMutableStateList()
         }
     }
 
+    fun resetDataStatusToLoading(){
+        _dataFetchResult.value = Result.Progress()
+    }
+
 }
+
 //TODO fix dependency tight coupling here
