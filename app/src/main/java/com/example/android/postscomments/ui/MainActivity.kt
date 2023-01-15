@@ -3,7 +3,6 @@ package com.example.android.postscomments.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,11 +18,12 @@ import com.example.android.postscomments.navigation.PostsCommentsNavHost
 import com.example.android.postscomments.navigation.PostsScreen
 import com.example.android.postscomments.ui.ui.theme.Dimens
 import com.example.android.postscomments.ui.ui.theme.PostsCommentsTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel: PostsCommentsViewModel by viewModels()
+        val viewModel: PostsCommentsViewModel by viewModel()
 
         setContent {
             val navController = rememberNavController()

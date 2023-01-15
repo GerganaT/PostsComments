@@ -18,6 +18,8 @@ buildscript {
         compose_lifecycle_version ='2.6.0-alpha01'
         compose_navigation_version = '2.5.3'
         lifecycle_version = '2.5.1'
+        koin_version= "3.3.2"
+
 
     }
     repositories {

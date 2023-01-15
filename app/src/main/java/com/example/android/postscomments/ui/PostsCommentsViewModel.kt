@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.postscomments.networking.Comment
 import com.example.android.postscomments.networking.Post
-import com.example.android.postscomments.networking.PostsCommentsApiServiceEntryPoint
 import com.example.android.postscomments.repo.PostsCommentsRepository
 import com.example.android.postscomments.repo.Result
 import com.example.android.postscomments.ui.ui.theme.*
@@ -20,10 +19,7 @@ import kotlinx.coroutines.launch
 /** ViewModel to shape the data for the UI for the Posts and Comments screens.
  * Ideally, there could be 2 ViewModels to support each screen,however,given the similar logic
  * and the relatively short code and for simplicity,I have used one combined ViewModel*/
-class PostsCommentsViewModel : ViewModel() {
-
-    private val repository =
-        PostsCommentsRepository(PostsCommentsApiServiceEntryPoint.apiService)
+class PostsCommentsViewModel(val repository: PostsCommentsRepository) : ViewModel() {
 
     // The logic for the Posts screen
 
@@ -107,5 +103,3 @@ class PostsCommentsViewModel : ViewModel() {
     }
 
 }
-
-// TODO fix dependency tight coupling here
