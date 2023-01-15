@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.android.postscomments.ui.ui.theme.Dimens
 import com.example.android.postscomments.ui.ui.theme.Lime200
 import com.example.android.postscomments.ui.ui.theme.PostsCommentsTheme
 
@@ -28,11 +28,11 @@ fun SinglePost(
     ) {
         Column(
             modifier = modifier
-                .padding(8.dp)
+                .padding(Dimens.paddingStandard)
         ) {
             Text(
                 text = postTitle,
-                modifier = Modifier.padding(bottom = 4.dp),
+                modifier = Modifier.padding(bottom = Dimens.paddingSmall),
                 fontWeight = FontWeight.Bold
             )
             Text(text = postBody)

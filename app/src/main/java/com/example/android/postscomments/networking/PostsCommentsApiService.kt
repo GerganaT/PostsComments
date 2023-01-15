@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 private const val BASE_URL = "https://jsonplaceholder.typicode.com"
@@ -26,8 +27,8 @@ interface PostsCommentsApiService {
     @GET("/posts")
     suspend fun getAllPosts():Response<List<Post>>
 
-    @GET("/comments?postId={id}")
-    suspend fun getPostRelatedComments(@Path("id") postId: Int): Response<List<Comment>>
+    @GET("/comments")
+    suspend fun getPostRelatedComments(@Query("postId") postId: Int): Response<List<Comment>>
 }
 
 object PostsCommentsApiServiceEntryPoint {

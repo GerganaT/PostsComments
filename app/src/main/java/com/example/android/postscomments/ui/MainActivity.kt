@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.example.android.postscomments.ui.comments.CommentsListScreen
 import com.example.android.postscomments.ui.ui.theme.PostsCommentsTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +13,9 @@ class MainActivity : ComponentActivity() {
         val viewModel: PostsCommentsViewModel by viewModels()
         setContent {
             PostsCommentsTheme {
-                PostsListScreen(viewModel = viewModel)
+              //  PostsListScreen(viewModel = viewModel)
+
+                CommentsListScreen(viewModel = viewModel)
             }
         }
     }
@@ -20,3 +23,4 @@ class MainActivity : ComponentActivity() {
 
 }
 //TODO set up custom screen names Posts and Comments and navigation
+// Put all dimensions as resources / no hardcoded dp's or sp's

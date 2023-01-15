@@ -15,6 +15,7 @@ data class Post(
 )
 
 data class Comment(
+    @Json(name = "id") val commentId:Int,
     @Json(name = "email") val userEmail: String,
     val body: String
 )
