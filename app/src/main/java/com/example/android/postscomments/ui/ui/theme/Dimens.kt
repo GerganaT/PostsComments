@@ -6,4 +6,5 @@ object Dimens {
     val paddingStandard = 8.dp
     val paddingSmall = 4.dp
     val iconSize = 24.dp
+    val listIndent = 8.dp
 }

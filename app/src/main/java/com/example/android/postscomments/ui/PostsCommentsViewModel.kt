@@ -40,10 +40,7 @@ class PostsCommentsViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-         //   getPostsDataAndRecordResult()
-            //TODO uncomment the above - just for testing - MainActivity to call both methods
-
-            getCommentsDataAndRecordResult(11)
+            getPostsDataAndRecordResult()
         }
     }
 
