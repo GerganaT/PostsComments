@@ -6,12 +6,11 @@ import com.example.android.postscomments.networking.PostsCommentsApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-//normally I'd use some DI framework here but for simplicity I'm skipping that
 class PostsCommentsRepository(
     val postsApi: PostsCommentsApiService
 ) {
 
-
+    // I know this is a bit of repetitive code but less error -prone than if using other approach
     suspend fun getPostsData(): Result<List<Post>> {
         return try {
             withContext(Dispatchers.IO) {
@@ -28,10 +27,8 @@ class PostsCommentsRepository(
             Result.Error
         }
     }
-//TODO  - navigation with deep linking,click on each post and go to relevant comment per post id
-    //TODO to get posts' comments
 
-    suspend fun getCommentsData(postId:Int): Result<List<Comment>> {
+    suspend fun getCommentsData(postId: Int): Result<List<Comment>> {
         return try {
             withContext(Dispatchers.IO) {
                 val response = postsApi.getPostRelatedComments(postId)

@@ -1,7 +1,7 @@
 package com.example.android.postscomments.ui.ui.theme
 
 import androidx.compose.ui.graphics.Color
-
+/**Custom colors palette for the posts and comments screens*/
 val Orange200 = Color(0xFFE2B066)
 val Purple500 = Color(0xFFC8B8DF)
 val Fuchsia200 = Color(0xFFF56293)

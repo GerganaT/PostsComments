@@ -5,30 +5,29 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 
 // contract,defining the minimum necessary attributes for each navigation destination
-interface PostsCommentsScreens{
-    val route:String
+interface PostsCommentsScreens {
+    val route: String
 }
 
-object PostsScreen:PostsCommentsScreens {
-   override val route = "posts_screen"
+object PostsScreen : PostsCommentsScreens {
+    override val route = "posts_screen"
 }
 
-object CommentsScreen:PostsCommentsScreens {
-   override val route = "comments_screen"
+object CommentsScreen : PostsCommentsScreens {
+    override val route = "comments_screen"
 }
 
 
-object SingleScreen {
+object SingleScreen : PostsCommentsScreens {
 
-    val route = "single_screen"
-    const val screenTypeArg = "screen_type"
+    override val route = "comments_screen"
+    const val postIdArg = "postId"
 
-    // the navigation" contract" that  has to be followed
-    val routeWithArgs = "${route}/{${screenTypeArg}}"
+    // the navigation" contract" that  has to be followed so data can be passed through screens
+    val routeWithArgs = "${route}/{${postIdArg}}"
     val arguments = listOf(
-        navArgument(screenTypeArg) { type = NavType.IntType })
+        navArgument(postIdArg) { type = NavType.IntType })
     val deepLinks = listOf(navDeepLink { uriPattern = "postscomments://$routeWithArgs" })
 }
 
-// the screen names in the TopAppBar
-val applicationScreens = listOf(PostsScreen,CommentsScreen)
+

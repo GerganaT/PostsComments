@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
 /** ViewModel to shape the data for the UI for the Posts and Comments screens.
  * Ideally, there could be 2 ViewModels to support each screen,however,given the similar logic
  * and the relatively short code and for simplicity,I have used one combined ViewModel*/
@@ -61,7 +62,7 @@ class PostsCommentsViewModel : ViewModel() {
         }
     }
 
-    fun resetDataStatusToLoading(){
+    fun resetDataStatusToLoading() {
         _postsDataFetchResult.value = Result.Progress()
     }
 
@@ -79,20 +80,17 @@ class PostsCommentsViewModel : ViewModel() {
     val commentsDataFetchResult: StateFlow<Result<List<Comment>>> =
         _commentsDataFetchResult.asStateFlow()
 
-
-    suspend fun getCommentsDataAndRecordResult(postId:Int) {
-        val commentsResult = repository.getCommentsData(postId)
-        _commentsDataFetchResult.value = commentsResult
-        if (commentsResult is Result.Success) {
-            _commentList.value =
-                commentsResult.data.toMutableStateList()
+    fun getCommentsDataAndRecordResult(postId: Int) {
+        viewModelScope.launch {
+            val commentsResult = repository.getCommentsData(postId)
+            _commentsDataFetchResult.value = commentsResult
+            if (commentsResult is Result.Success) {
+                _commentList.value =
+                    commentsResult.data.toMutableStateList()
+            }
         }
-    }
 
-    fun resetCommentsDataStatusToLoading(){
-        _commentsDataFetchResult.value = Result.Progress()
     }
-
 
     fun getRandomColorPerComment(): Color {
         val colorsWithIds: HashMap<Int, Color> = hashMapOf(
@@ -103,6 +101,10 @@ class PostsCommentsViewModel : ViewModel() {
         return colorsWithIds[randomizedKey]!!
     }
 
+    fun resetCommentsDataStatusToLoading() {
+        _commentsDataFetchResult
+            .value = Result.Progress()
+    }
 
 }
 

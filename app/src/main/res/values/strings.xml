@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">PostsComments</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">PostsComments</string>
     <string name="data_not_loaded_error_message">Oops,there was an error.\nTap to retry.</string>
     <string name="alert_dialog_dismiss_button">DISMISS</string>
     <string name="alert_dialog_text">"Oops, something went wrong.\nPlease try again later."</string>
+    <string name="back_icon_app_bar_content_description">backIcon</string>
+    <string name="posts_screen_label">Posts</string>
+    <string name="comments_screen_label">Comments</string>
 </resources>

@@ -21,11 +21,12 @@ fun SinglePost(
     postTitle: String,
     postBody: String,
     backgroundColor: Color,
-    openRelatedComments:()->Unit,
+    openRelatedComments: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .clickable { openRelatedComments() },
         color = backgroundColor
     ) {

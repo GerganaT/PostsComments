@@ -6,9 +6,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
-// Util functions to reduce boilerplate code for Posts and Comments screen
-
+/**Used by both screens function to show loading indicator while fetching network data*/
 @Composable
 fun ShowLoadingProgressIndicator(
     modifier: Modifier = Modifier

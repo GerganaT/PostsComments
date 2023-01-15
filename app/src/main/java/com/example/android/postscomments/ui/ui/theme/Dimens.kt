@@ -7,4 +7,5 @@ object Dimens {
     val paddingSmall = 4.dp
     val iconSize = 24.dp
     val listIndent = 8.dp
+    val appBarElevation = 10.dp
 }

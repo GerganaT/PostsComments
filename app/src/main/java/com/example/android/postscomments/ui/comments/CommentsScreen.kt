@@ -7,13 +7,12 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.android.postscomments.R
@@ -23,17 +22,24 @@ import com.example.android.postscomments.ui.PostsCommentsViewModel
 import com.example.android.postscomments.ui.ShowLoadingProgressIndicator
 import com.example.android.postscomments.ui.ui.theme.Dimens
 import com.example.android.postscomments.ui.ui.theme.PostsCommentsTheme
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun CommentsListScreen(
     modifier: Modifier = Modifier,
-    viewModel: PostsCommentsViewModel
+    onDismissClicked: () -> Unit,
+    viewModel: PostsCommentsViewModel,
+    postId: Int
 ) {
     val result by viewModel.commentsDataFetchResult.collectAsStateWithLifecycle()
-
-    val scope = rememberCoroutineScope()
+    // this prevents multiple recompositions whenever this screen is being navigated to
+    LaunchedEffect(Unit) {
+        // this delay is not really needed, but demonstrates that loading indicator is up every time
+        // we navigate to comments screen ,as due to fast internet indicator is not there each time
+        delay(2000)
+        viewModel.getCommentsDataAndRecordResult(postId)
+    }
     when (result) {
         is Result.Progress -> ShowLoadingProgressIndicator()
         is Result.Success -> {
@@ -41,11 +47,14 @@ fun CommentsListScreen(
             viewModel.commentList.collectAsStateWithLifecycle()
             val randomColorPerComment = { viewModel.getRandomColorPerComment() }
             CommentsList(comments = comments, commentAndBubbleColor = randomColorPerComment)
+
         }
         Result.Error -> {
             NoDataDisplayedAlertDialog {
-
+                onDismissClicked()
             }
+
+
         }
 
 
@@ -78,25 +87,31 @@ fun CommentsList(
 
     }
 }
+
 @Composable
 fun NoDataDisplayedAlertDialog(
-    modifier:Modifier = Modifier,
-    onDismissClicked:() -> Unit
+    modifier: Modifier = Modifier,
+    onDismissClicked: () -> Unit
 
-){
+) {
     AlertDialog(
         onDismissRequest = { },
-        confirmButton = {
+        confirmButton = {},
+        dismissButton =
+        {
             TextButton(onClick = onDismissClicked)
             { Text(text = stringResource(R.string.alert_dialog_dismiss_button)) }
         },
-        title = { Text(text = stringResource(R.string.alert_dialog_text)) }
+        title = {
+            Text(text = stringResource(R.string.alert_dialog_text))
+        }
     )
 }
 
+
 @Preview
 @Composable
-fun NoDataDisplayedAlertDialogPreview(){
+fun NoDataDisplayedAlertDialogPreview() {
     PostsCommentsTheme {
         NoDataDisplayedAlertDialog {
 

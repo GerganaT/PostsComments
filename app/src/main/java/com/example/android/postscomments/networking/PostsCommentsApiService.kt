@@ -6,7 +6,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -25,7 +24,7 @@ private val retrofit = Retrofit.Builder()
 interface PostsCommentsApiService {
 
     @GET("/posts")
-    suspend fun getAllPosts():Response<List<Post>>
+    suspend fun getAllPosts(): Response<List<Post>>
 
     @GET("/comments")
     suspend fun getPostRelatedComments(@Query("postId") postId: Int): Response<List<Comment>>

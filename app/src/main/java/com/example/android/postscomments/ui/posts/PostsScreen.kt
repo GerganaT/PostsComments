@@ -28,7 +28,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun PostsListScreen(
     modifier: Modifier = Modifier,
-    viewModel: PostsCommentsViewModel
+    viewModel: PostsCommentsViewModel,
+    onSinglePostClicked: (Int) -> Unit
 ) {
     val result by viewModel.postsDataFetchResult.collectAsStateWithLifecycle()
 
@@ -42,9 +43,9 @@ fun PostsListScreen(
             PostsList(
                 posts = posts,
                 getBackgroundColor = getBackgroundColor,
-                onSinglePostClicked = {})
+                onSinglePostClicked = onSinglePostClicked
+            )
         }
-        //TODO pass navigation method to PostsList
         Result.Error -> {
             ShowErrorWhenDataNotLoaded {
                 scope.launch {
@@ -64,7 +65,7 @@ fun PostsList(
     modifier: Modifier = Modifier,
     posts: List<Post>,
     getBackgroundColor: (Int) -> Color,
-    onSinglePostClicked:() -> Unit
+    onSinglePostClicked: (Int) -> Unit
 
 ) {
 
@@ -77,7 +78,7 @@ fun PostsList(
                 postTitle = post.title,
                 postBody = post.body,
                 backgroundColor = getBackgroundColor(post.authorId),
-                openRelatedComments = {onSinglePostClicked()}
+                openRelatedComments = { onSinglePostClicked(post.postId) }
             )
 
         }
