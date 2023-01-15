@@ -1,5 +1,6 @@
 package com.example.android.postscomments.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,10 +21,12 @@ fun SinglePost(
     postTitle: String,
     postBody: String,
     backgroundColor: Color,
+    openRelatedComments:()->Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .clickable { openRelatedComments() },
         color = backgroundColor
     ) {
         Column(
@@ -51,7 +54,8 @@ fun SinglePostPreview() {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                     " Maecenas maximus dolor non felis elementum placerat. Vestibulum " +
                     "a sagittis nibh, non.",
-            backgroundColor = Lime200
+            backgroundColor = Lime200,
+            openRelatedComments = {}
         )
     }
 

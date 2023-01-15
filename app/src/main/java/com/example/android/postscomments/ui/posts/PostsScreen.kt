@@ -39,8 +39,12 @@ fun PostsListScreen(
             val posts by
             viewModel.postsList.collectAsStateWithLifecycle()
             val getBackgroundColor = { authorId: Int -> viewModel.getColorPerAuthor(authorId) }
-            PostsList(posts = posts, getBackgroundColor = getBackgroundColor)
+            PostsList(
+                posts = posts,
+                getBackgroundColor = getBackgroundColor,
+                onSinglePostClicked = {})
         }
+        //TODO pass navigation method to PostsList
         Result.Error -> {
             ShowErrorWhenDataNotLoaded {
                 scope.launch {
@@ -59,7 +63,8 @@ fun PostsListScreen(
 fun PostsList(
     modifier: Modifier = Modifier,
     posts: List<Post>,
-    getBackgroundColor: (Int) -> Color
+    getBackgroundColor: (Int) -> Color,
+    onSinglePostClicked:() -> Unit
 
 ) {
 
@@ -71,7 +76,8 @@ fun PostsList(
             SinglePost(
                 postTitle = post.title,
                 postBody = post.body,
-                backgroundColor = getBackgroundColor(post.authorId)
+                backgroundColor = getBackgroundColor(post.authorId),
+                openRelatedComments = {onSinglePostClicked()}
             )
 
         }

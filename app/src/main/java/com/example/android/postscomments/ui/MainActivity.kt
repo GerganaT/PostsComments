@@ -22,4 +22,4 @@ class MainActivity : ComponentActivity() {
 
 
 }
-//TODO set up custom screen names Posts and Comments and navigation
+//TODO set up custom screen names Posts and Comments and navigation - topAppbar
