@@ -20,7 +20,8 @@ fun PostsCommentsNavHost(
     navController: NavHostController,
     viewModel: PostsCommentsViewModel,
     modifier: Modifier = Modifier,
-    padding: PaddingValues
+    padding: PaddingValues,
+    appBarTitle: String?,
 ) {
 
     NavHost(
@@ -46,7 +47,8 @@ fun PostsCommentsNavHost(
             CommentsListScreen(
                 onDismissClicked = { navController.navigate(PostsScreen.route) },
                 viewModel = viewModel,
-                postId = postId!!
+                postId = postId!!,
+                appBarTitle = appBarTitle
             )
         }
     }

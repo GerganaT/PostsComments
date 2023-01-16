@@ -30,7 +30,8 @@ fun CommentsListScreen(
     modifier: Modifier = Modifier,
     onDismissClicked: () -> Unit,
     viewModel: PostsCommentsViewModel,
-    postId: Int
+    postId: Int,
+    appBarTitle: String?
 ) {
     val result by viewModel.commentsDataFetchResult.collectAsStateWithLifecycle()
     // this prevents multiple recompositions whenever this screen is being navigated to
@@ -50,7 +51,7 @@ fun CommentsListScreen(
 
         }
         Result.Error -> {
-            NoDataDisplayedAlertDialog {
+            NoDataDisplayedAlertDialog(appBarTitle = appBarTitle) {
                 onDismissClicked()
             }
 
@@ -91,21 +92,26 @@ fun CommentsList(
 @Composable
 fun NoDataDisplayedAlertDialog(
     modifier: Modifier = Modifier,
+    appBarTitle: String?,
     onDismissClicked: () -> Unit
 
+
 ) {
-    AlertDialog(
-        onDismissRequest = { },
-        confirmButton = {},
-        dismissButton =
-        {
-            TextButton(onClick = onDismissClicked)
-            { Text(text = stringResource(R.string.alert_dialog_dismiss_button)) }
-        },
-        title = {
-            Text(text = stringResource(R.string.alert_dialog_text))
-        }
-    )
+    if (appBarTitle == stringResource(id = R.string.comments_screen_label)){
+        AlertDialog(
+            onDismissRequest = { },
+            confirmButton = {},
+            dismissButton =
+            {
+                TextButton(onClick = onDismissClicked)
+                { Text(text = stringResource(R.string.alert_dialog_dismiss_button)) }
+            },
+            title = {
+                Text(text = stringResource(R.string.alert_dialog_text))
+            }
+        )
+    }
+
 }
 
 
@@ -113,7 +119,7 @@ fun NoDataDisplayedAlertDialog(
 @Composable
 fun NoDataDisplayedAlertDialogPreview() {
     PostsCommentsTheme {
-        NoDataDisplayedAlertDialog {
+        NoDataDisplayedAlertDialog(appBarTitle = "sometitle") {
 
         }
     }

@@ -74,7 +74,8 @@ class MainActivity : ComponentActivity() {
                 PostsCommentsNavHost(
                     navController = navController,
                     viewModel = viewModel,
-                    padding = padding
+                    padding = padding,
+                    appBarTitle = appBarTitle
                 )
             }
         )
