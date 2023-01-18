@@ -45,7 +45,7 @@ fun PostsCommentsNavHost(
                 navBackStackEntry.arguments?.getInt(SingleScreen.postIdArg)
             // Pass postId to CommentsScreen
             CommentsListScreen(
-                onDismissClicked = { navController.navigate(PostsScreen.route) },
+                onDismissClicked = { navController.navigateSingleTopTo(PostsScreen.route) },
                 viewModel = viewModel,
                 postId = postId!!,
                 appBarTitle = appBarTitle
