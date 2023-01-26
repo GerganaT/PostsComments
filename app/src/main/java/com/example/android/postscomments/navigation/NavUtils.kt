@@ -47,7 +47,7 @@ fun PostsCommentsNavHost(
             CommentsListScreen(
                 onDismissClicked = { navController.navigateSingleTopTo(PostsScreen.route) },
                 viewModel = viewModel,
-                postId = postId!!,
+                postId = postId ?: 0,
                 appBarTitle = appBarTitle
             )
         }
